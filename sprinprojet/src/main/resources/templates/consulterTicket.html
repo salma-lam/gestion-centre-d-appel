@@ -6,6 +6,7 @@
         data-theme="theme-default"
         data-assets-path="../assets/"
         data-template="vertical-menu-template-free"
+        xmlns:th="http://www.thymeleaf.org"
 >
 <head>
   <meta charset="utf-8" />
@@ -64,7 +65,7 @@
         <a th:href="@{/consulterTicket}" class="menu-link">
               <span class="app-brand-logo demo">
                 <div class="app-brand justify-content-center">
-                  <a href="../WeHelp/wehelp.html" class="app-brand-link gap-2">
+                  <a th:href="@{/agent}" class="app-brand-link gap-2">
                     <span class="app-brand-logo demo">
                         <img src="../assets/img/logo1.png" alt="WeHelp" width="130px" height="50px">
                     </span>
@@ -141,49 +142,48 @@
                 <table class="table table-striped">
                   <thead>
                   <tr>
-                    <th>nom et prenom client</th>
+                    <th>Nom et Prénom</th>
                     <th>Email</th>
-                    <th>Talephone</th>
-                    <th>Type Reclamation</th>
-                    <th>Reclamation</th>
-                    <th>Date Reclamation</th>
-                    <th>Type Technicien</th>
-                    <th>Date Cloture</th>
-                    <th>Status</th>
+                    <th>Téléphone</th>
+                    <th>Type de Réclamation</th>
+                    <th>Réclamation</th>
+                    <th>Date de Réclamation</th>
+                    <th>Date de Clôture</th>
+                    <th>Statut</th>
                     <th>Actions</th>
                   </tr>
                   </thead>
                   <tbody class="table-border-bottom-0">
-                  <tr>
-                    <td><i class="fab fa-vuejs fa-lg text-success me-3"></i> <strong>------</strong></td>
-                    <td>------</td>
-                    <td>------</td>
-                    <td>-------</span></td>
-                    <td>------</td>
-                    <td>------</td>
-                    <td>------</td>
-                    <td>-------</span></td>
-                    <td><span class="badge bg-label-info me-1">Valide</span></td>
-                    <!-- <td><span class="badge bg-label-info me-1">en attente</span></td>
-                    <td><span class="badge bg-label-info me-1">annulée</span></td> -->
+                  <tr th:each="ticket : ${tickets}">
+                    <td >sara alaoui</td>
+                    <td>sara@gmail.com</td>
+                    <td>06000000</td>
+                    <td>Retard de livraison</td>
+                    <td><span class="badge bg-label-info me-1">j'ai pas recu ma commande</span></td>
+                    <td >31-05-2024</td>
+                    <td th:text="${ticket.dateCloture}"></td>
                     <td>
-                      <div class="dropdown">
-                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                          <i class="bx bx-dots-vertical-rounded"></i>
-                        </button>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item" href="javascript:void(0);"
-                          ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                          >
-                          <a class="dropdown-item" href="javascript:void(0);"
-                          ><i class="bx bx-trash me-1"></i> Delete</a
-                          >
-                        </div>
-                      </div>
+                    <span th:text="${ticket.statut}" class="badge bg-label-info me-1"
+                          th:classappend="${ticket.statut == 'Terminé' ? 'bg-green' :
+                                         ticket.statut == 'En cours' ? 'bg-warning' :
+                                         ticket.statut == 'En attente' ? 'bg-info' :
+                                         ticket.statut == 'Annulé' ? 'bg-danger' : ''}">
+                    </span>
+                    </td>
+                    <td>
+
+                      <form th:action="@{/deleteTicket/{idTicket} (idTicket=${ticket.idTicket})}" method="post">
+                        <input type="hidden" name="_method" value="DELETE" />
+                        <a th:href="@{/AddInfo/{idTicket}(idTicket=${ticket.idTicket})}" class="btn btn-primary me-2">Update</a>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                      </form>
                     </td>
                   </tr>
+
+                  <!-- Ajoutez plus de lignes au besoin -->
                   </tbody>
                 </table>
+
               </div>
             </div>
             <!--/ Striped Rows -->

@@ -6,6 +6,7 @@
         data-theme="theme-default"
         data-assets-path="../assets/"
         data-template="vertical-menu-template-free"
+        xmlns:th="http://www.thymeleaf.org"
 >
 <head>
   <meta charset="utf-8" />
@@ -61,10 +62,10 @@
 
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
       <div class="app-brand demo"  th:fragment="modifierProfileFragment">
-        <a th:href="" class="menu-link">
+        <a th:href="@{/modifierProfile}" class="menu-link">
               <span class="app-brand-logo demo">
                 <div class="app-brand justify-content-center">
-                  <a href="client.html" class="app-brand-link gap-2">
+                  <a th:href="@{/agent}" class="app-brand-link gap-2">
                     <span class="app-brand-logo demo">
                         <img src="../assets/img/logo1.png" alt="WeHelp" width="130px" height="50px">
                     </span>
@@ -131,9 +132,6 @@
       <div class="content-wrapper" style="margin-top:-2%;">
         <!-- Content dashboard -->
         <div class="content-wrapper" style="margin-top: 90px; /* Hauteur de l'en-tête */">
-
-
-
           <!-------------------------------------Content------------------------------------------------------------------------->
 
           <div class="container-xxl flex-grow-1 container-p-y" style="margin-top:-10%">
@@ -147,43 +145,51 @@
                   <!-- Account -->
                   <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
-                      <img
-                              src="../assets/img/avatars/1.png"
-                              alt="user-avatar"
-                              class="d-block rounded"
-                              height="100"
-                              width="100"
-                              id="uploadedAvatar"
-                      />
+                      <div>
+                        <!-- chagement d'image -->
+                        <img id="profileImage" src="../assets/img/avatars/5.png" alt="Profile Image" width="150" height="150">
+                      </div>
                       <div class="button-wrapper">
                         <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                           <span class="d-none d-sm-block">Upload new photo</span>
                           <i class="bx bx-upload d-block d-sm-none"></i>
-                          <input
-                                  type="file"
-                                  id="upload"
-                                  class="account-file-input"
-                                  hidden
-                                  accept="image/png, image/jpeg"
-                          />
+                          <input type="file" id="upload" class="account-file-input" hidden accept="image/png, image/jpeg" onchange="changeProfileImage(this)">
                         </label>
-
                       </div>
+                      <script>
+                        <!-- Script de chagement -->
+                        function changeProfileImage(input) {
+                          if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+
+                            reader.onload = function (e) {
+                              // Assurez-vous que l'ID correspond à l'ID de l'image dans le HTML
+                              document.getElementById('profileImage').src = e.target.result;
+                            };
+
+                            reader.readAsDataURL(input.files[0]);
+                          }
+                        }
+                      </script>
+                      <!-- fin de script  -->
                     </div>
                   </div>
                   <hr class="my-0" />
                   <div class="card-body">
-                    <form id="formAccountSettings" method="POST" onsubmit="return false">
-                      <div class="row">
 
+                    <div th:if="${success} == 'true'" class="alert alert-success" role="alert">
+                      Modification effectuée avec succès !
+                    </div>
+                    <form id="formAccountSettings" th:action="@{/modifierProfile/{idAgent}(idAgent=${agent.idAgent})}" method="POST" th:each="agent : ${agents}">
+                      <div class="row">
                         <div class="mb-3">
                           <label class="form-label" for="basic-default-fullname">first Name</label>
-                          <input type="text" class="form-control" id="basic-default-fullname" name="prenom" placeholder="first Name" />
+                          <input type="text" class="form-control" id="basic-default-fullname"  th:value="${agent.prenom}" name="prenom" placeholder="first Name" />
                         </div>
 
                         <div class="mb-3">
                           <label class="form-label" for="basic-default-fullname">Last Name</label>
-                          <input type="text" class="form-control" id="basic-default-fullname" name="nom" placeholder="Last Name" />
+                          <input type="text" class="form-control" id="basic-default-fullname" th:value="${agent.nom}" name="nom" placeholder="Last Name" />
                         </div>
 
 
@@ -194,6 +200,7 @@
                                     type="text"
                                     id="basic-default-email"
                                     class="form-control"
+                                    th:value="${agent.email}"
                                     name="email"
                                     placeholder="john.doe"
                                     aria-label="john.doe"
@@ -209,40 +216,34 @@
                                   type="text"
                                   id="basic-default-phone"
                                   name="tele"
+                                  th:value="${agent.tele}"
                                   class="form-control phone-mask"
                                   placeholder="658 799 8941"
                           />
                         </div>
                         <div class="mb-3 col-md-6">
                           <label for="address" class="form-label">Address</label>
-                          <input type="text" class="form-control" id="address" name="adresse" placeholder="Address" />
+                          <input type="text" class="form-control" id="address" th:value="${agent.adresse}" name="adresse" placeholder="Address" />
                         </div>
 
                         <div class="mb-3 col-md-6">
-                          <label class="form-label" for="ville">Ville</label>
-                          <select id="ville" class="select2 form-select">
-                            <option value="" name="ville">Select</option>
-                            <option value="Kenitra">Kenitra</option>
-                            <option value="Kenitra">Rabat</option>
-                          </select>
+                          <label for="genre" class="form-label">Genre</label>
+                          <input type="text" class="form-control" id="genre" th:value="${agent.genre}" name="genre" placeholder="genre" />
                         </div>
                       </div>
-                      <div class="mt-2">
-                        <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                        <button type="reset" class="btn btn-outline-secondary">Cancel</button>
-                      </div>
+
+                        <div class = "box-footer">
+                          <button type="submit" class="btn btn-primary me-2">
+                            Update
+                          </button>
+                        </div>
                     </form>
+
                   </div>
-                  <!-- /Account -->
                 </div>
               </div>
             </div>
           </div>
-          <!-------------------------------------------------------------------------------------------------------------->
-
-
-
-
           <!-------------------------------------Footer------------------------------------------------------------------------->
           <!----------------------------------Inclusion du footer // syntaxe Thymeleaf pour inclure le footer----------------------------------------->
           <footer th:insert="footer :: footerFragment"></footer>

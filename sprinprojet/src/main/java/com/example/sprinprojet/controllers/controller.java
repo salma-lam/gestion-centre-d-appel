@@ -93,11 +93,11 @@ public class controller {
         return"listeTicket";
         //
     }
-    @GetMapping("/profiladmin")
-    public String profiladmin(){
-        return"profiladmin";
-        //
-    }
+    // @GetMapping("/profiladmin")
+    // public String profiladmin(){
+    //     return"profiladmin";
+    //     //
+    // }
     @GetMapping("/ajouteragent")
     public String  ajouteragent(){
         return"ajouteragent";

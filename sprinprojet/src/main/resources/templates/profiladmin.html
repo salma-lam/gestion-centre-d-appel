@@ -6,6 +6,7 @@
         data-theme="theme-default"
         data-assets-path="../assets/"
         data-template="vertical-menu-template-free"
+        xmlns:th="http://www.thymeleaf.org"
 >
 <head>
   <meta charset="utf-8" />
@@ -82,7 +83,7 @@
       <ul class="menu-inner py-1">
         <!-------------------------------------- Menu ------------------------------------------------------------------------------>
         <li class="menu-item active">
-          <a th:href="@{/profiladmin}" class="menu-link">
+          <a th:href="@{/admin}" class="menu-link">
             <i class="menu-icon tf-icons bx bx-home-circle"></i>
             <div data-i18n="Analytics">Dashboard</div>
           </a>
@@ -126,7 +127,7 @@
           </a>
           <ul class="menu-sub">
             <li class="menu-item">
-              <a th:href="@{/profiladmin}" class="menu-link">
+              <a th:href="@{/admin/profil}" class="menu-link">
                 <div data-i18n="Account"> Modifier Profile</div>
               </a>
             </li>
@@ -152,25 +153,6 @@
             </li>
           </ul>
         </li>
-        <!-- Gérer le technicien -->
-        <li class="menu-item">
-          <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons bx bx-dock-top"></i>
-            <div data-i18n="Account Settings">Technicien</div>
-          </a>
-          <ul class="menu-sub">
-            <li class="menu-item">
-              <a th:href="@{/ajouterTechnicien}" class="menu-link">
-                <div data-i18n="Account">Ajouter Techniciens </div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a th:href="@{/listeTechnicien}" class="menu-link">
-                <div data-i18n="Account"> Liste Techniciens </div>
-              </a>
-            </li>
-          </ul>
-        </li>
       </ul>
     </aside>
     <!-------------------------------------------------------------------------------------------------------------------->
@@ -188,7 +170,7 @@
         <!-- Content dashboard -->
         <div class="content-wrapper" style="margin-top: 90px; /* Hauteur de l'en-tête */">
 
-        <!-------------------------------------Content------------------------------------------------------------------------->
+          <!-------------------------------------Content------------------------------------------------------------------------->
 
           <div class="container-xxl flex-grow-1 container-p-y">
             <div class="row">
@@ -197,127 +179,83 @@
                   <h5 class="card-header">Profile Details</h5>
                   <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
-                      <img
-                              src="../assets/img/avatars/1.png"
-                              alt="user-avatar"
-                              class="d-block rounded"
-                              height="100"
-                              width="100"
-                              id="uploadedAvatar"
-                      />
+                      <div>
+                        <!-- chagement d'image -->
+                        <img id="profileImage" src="../assets/img/avatars/1.png" alt="Profile Image" width="150" height="150">
+                      </div>
                       <div class="button-wrapper">
                         <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                           <span class="d-none d-sm-block">Upload new photo</span>
                           <i class="bx bx-upload d-block d-sm-none"></i>
-                          <input
-                                  type="file"
-                                  id="upload"
-                                  class="account-file-input"
-                                  hidden
-                                  accept="image/png, image/jpeg"
-                          />
+                          <input type="file" id="upload" class="account-file-input" hidden accept="image/png, image/jpeg" onchange="changeProfileImage(this)">
                         </label>
-                        <!-- <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-                          <i class="bx bx-reset d-block d-sm-none"></i>
-                          <span class="d-none d-sm-block">Reset</span>
-                        </button> -->
-
-
                       </div>
+                      <script>
+                        <!-- Script de chagement -->
+                        function changeProfileImage(input) {
+                          if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+
+                            reader.onload = function (e) {
+                              // Assurez-vous que l'ID correspond à l'ID de l'image dans le HTML
+                              document.getElementById('profileImage').src = e.target.result;
+                            };
+
+                            reader.readAsDataURL(input.files[0]);
+                          }
+                        }
+                      </script>
+                      <!-- fin de script  -->
                     </div>
                   </div>
                   <hr class="my-0" />
                   <div class="card-body">
-                    <form id="formAccountSettings" method="POST" onsubmit="return false">
-                      <div class="row">
-                        <!-- <div class="mb-3 col-md-6">
-                          <label for="firstName" class="form-label">First Name</label>
-                          <input
-                            class="form-control"
-                            type="text"
-                            id="firstName"
-                            name="firstName"
-                            value="nom"
-                            autofocus
-                          />
-                        </div> -->
-                        <!-- <div class="mb-3 col-md-6">
-                          <label for="lastName" class="form-label">Last Name</label>
-                          <input class="form-control" type="text" name="lastName" id="lastName" value="Prenom" />
-                        </div> -->
 
+                    <div th:if="${success} == 'true'" class="alert alert-success" role="alert">
+                      Modification effectuée avec succès !
+                    </div>
+                    <form id="formAccountSettings" th:action="@{/profiladmin/{idAdmin}(idAdmin=${admin.idAdmin})}" method="POST" th:each="admin  :${admins}">
+                      <div class="row">
                         <div class="mb-3">
-                          <label class="form-label" for="basic-default-fullname">Full Name</label>
-                          <input type="text" class="form-control" id="basic-default-fullname" placeholder="John Doe" />
+                          <label class="form-label" for="basic-default-fullname">First Name</label>
+                          <input type="text" class="form-control" id="basic-default-fullname" th:value="${admin.prenom}" name="prenom" placeholder="First Name" />
                         </div>
 
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-default-lastname">Last Name</label>
+                          <input type="text" class="form-control" id="basic-default-lastname" th:value="${admin.nom}" name="nom" placeholder="Last Name" />
+                        </div>
 
-                        <!-- <div class="mb-3 col-md-6">
-                          <label for="email" class="form-label">E-mail</label>
-                          <input
-                            class="form-control"
-                            type="text"
-                            id="email"
-                            name="email"
-                            value="name@example.com"
-                            placeholder="name@example.com"
-                          />
-                        </div> -->
                         <div class="mb-3">
                           <label class="form-label" for="basic-default-email">Email</label>
                           <div class="input-group input-group-merge">
-                            <input
-                                    type="text"
-                                    id="basic-default-email"
-                                    class="form-control"
-                                    placeholder="john.doe"
-                                    aria-label="john.doe"
-                                    aria-describedby="basic-default-email2"
-                            />
+                            <input type="text" id="basic-default-email" class="form-control" th:value="${admin.email}" name="email" placeholder="john.doe@example.com" aria-describedby="basic-default-email2" />
                             <span class="input-group-text" id="basic-default-email2">@example.com</span>
                           </div>
                           <div class="form-text">You can use letters, numbers & periods</div>
                         </div>
-                        <!-- <div class="mb-3 col-md-6">
-                          <label class="form-label" for="phoneNumber">Phone Number</label>
-                          <div class="input-group input-group-merge">
-                            <span class="input-group-text">MAD (+121)</span>
-                            <input
-                              type="text"
-                              id="phoneNumber"
-                              name="phoneNumber"
-                              class="form-control"
-                              placeholder="06 --------"
-                            />
-                          </div>
-                        </div> -->
+
                         <div class="mb-3">
                           <label class="form-label" for="basic-default-phone">Phone No</label>
-                          <input
-                                  type="text"
-                                  id="basic-default-phone"
-                                  class="form-control phone-mask"
-                                  placeholder="658 799 8941"
-                          />
-                        </div>
-                        <div class="mb-3 col-md-6">
-                          <label for="address" class="form-label">Address</label>
-                          <input type="text" class="form-control" id="address" name="address" placeholder="Address" />
+                          <input type="text" id="basic-default-phone" name="tele" th:value="${admin.tele}" class="form-control phone-mask" placeholder="658 799 8941" />
                         </div>
 
                         <div class="mb-3 col-md-6">
-                          <label class="form-label" for="ville">Ville</label>
-                          <select id="ville" class="select2 form-select">
-                            <option value="">Select</option>
-                            <option value="Kenitra">Kenitra</option>
-                          </select>
+                          <label for="address" class="form-label">Address</label>
+                          <input type="text" class="form-control" id="address" th:value="${admin.adresse}" name="adresse" placeholder="Address" />
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                          <label for="genre" class="form-label">Genre</label>
+                          <input type="text" class="form-control" id="genre" th:value="${admin.genre}" name="genre" placeholder="Genre" />
                         </div>
                       </div>
-                      <div class="mt-2">
-                        <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                        <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+
+                      <div class="box-footer">
+                        <button type="submit" class="btn btn-primary me-2">Update</button>
                       </div>
                     </form>
+
                   </div>
                   <!-- /Account -->
                 </div>

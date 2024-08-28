@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html
+        xmlns:th="http://www.thymeleaf.org"
         lang="en"
         class="light-style layout-menu-fixed"
         dir="ltr"
@@ -50,7 +51,6 @@
   <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="../assets/js/config.js"></script>
-
 </head>
 
 <body>
@@ -118,21 +118,7 @@
 
           </ul>
         </li>
-        <!--  gere profile  -->
-        <li class="menu-item">
-          <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons bx bx-dock-top"></i>
-            <div data-i18n="Account Settings">Profil</div>
-          </a>
-          <ul class="menu-sub">
-            <li class="menu-item">
-              <a th:href="@{/profiladmin}" class="menu-link">
-                <div data-i18n="Account"> Modifier Profile</div>
-              </a>
-            </li>
 
-          </ul>
-        </li>
         <!-- Gérer l'agent -->
         <li class="menu-item">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -152,26 +138,22 @@
             </li>
           </ul>
         </li>
-        <!-- Gérer le technicien -->
+        <!--  gere profile  -->
         <li class="menu-item">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-dock-top"></i>
-            <div data-i18n="Account Settings">Technicien</div>
+            <div data-i18n="Account Settings">Profil</div>
           </a>
           <ul class="menu-sub">
             <li class="menu-item">
-              <a th:href="@{/ajouterTechnicien}" class="menu-link">
-                <div data-i18n="Account">Ajouter Techniciens </div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a th:href="@{/listeTechnicien}" class="menu-link">
-                <div data-i18n="Account"> Liste Techniciens </div>
+              <a th:href="@{/profiladmin}" class="menu-link">
+                <div data-i18n="Account"> Modifier Profile</div>
               </a>
             </li>
           </ul>
         </li>
       </ul>
+
     </aside>
     <!-------------------------------------------------------------------------------------------------------------------->
 
@@ -181,7 +163,8 @@
     <div class="layout-page">
       <!-------------------------------------header----------------------------------------------- -->
       <!-- Inclusion du header -->
-      <header th:insert="header :: headerFragment"></header>
+      <!-- <header th:insert="header :: headerFragment"></header>-->
+      <header th:insert="~{header :: headerFragment}"></header>
       <!------------------------------------------------------------------------------------------- -->
       <!-- Content dashboard -->
       <div class="content-wrapper" style="margin-top:-2%;">
@@ -190,7 +173,10 @@
 
 
 
+
+
           <!-------------------------------------Content------------------------------------------------------------------------->
+
 
 
           <!-- Content wrapper -->
@@ -311,13 +297,15 @@
 
 
 
+
         <!-------------------------------------------------------------------------------------------------------------->
 
 
 
-
           <!-------------------------------------Footer------------------------------------------------------------------------->
-          <footer th:insert="footer :: footerFragment"></footer>
+          <!--<footer th:insert="footer :: footerFragment"></footer>-->
+          <footer th:insert="~{footer :: footerFragment}"></footer>
+
           <!--------------------------------------------------------------------------------------------------------------->
           <div class="content-backdrop fade"></div>
         </div>
