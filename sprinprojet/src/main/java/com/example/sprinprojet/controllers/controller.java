@@ -48,11 +48,11 @@ public class controller {
         return"agent";
         //
     }
-    @GetMapping("/consulterTicket")
-    public String consulterTicket(){
-        return"consulterTicket";
-        //
-    }
+    // @GetMapping("/consulterTicket")
+    // public String consulterTicket(){
+    //     return"consulterTicket";
+    //     //
+    // }
     // @GetMapping("/modifierProfile")
     // public String modifierProfile(){
     //     return"modifierProfile";

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        class="light-style layout-menu-fixed"
+        dir="ltr"
+        data-theme="theme-default"
+        data-assets-path="../assets/"
+        data-template="vertical-menu-template-free"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+  <meta charset="utf-8" />
+  <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+  />
+
+  <title>Dashboard Agent </title>
+
+  <meta name="description" content="" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+          href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+          rel="stylesheet"
+  />
+
+  <!-- Icons. Uncomment required icon fonts -->
+  <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
+  <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+  <link rel="stylesheet" href="../assets/css/demo.css" />
+
+  <!-- Vendors CSS -->
+  <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+  <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+
+  <!-- Page CSS -->
+
+  <!-- Helpers -->
+  <script src="../assets/vendor/js/helpers.js"></script>
+
+  <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+  <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+  <script src="../assets/js/config.js"></script>
+</head>
+
+<body>
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    <!-- ------------------------------Menu -------------------------------------------------------------->
+
+    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+      <div class="app-brand demo"  th:fragment="profileagentFragment">
+        <a href="Adminindex.html" class="app-brand-link">
+              <span class="app-brand-logo demo">
+                <div class="app-brand justify-content-center">
+                  <a   th:href="@{/agent}"  class="app-brand-link gap-2">
+                    <span class="app-brand-logo demo">
+                        <img src="../assets/img/logo1.png" alt="WeHelp" width="130px" height="50px">
+                    </span>
+                  </a>
+                </div>
+              </span>
+        </a>
+
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+          <i class="bx bx-chevron-left bx-sm align-middle"></i>
+        </a>
+      </div>
+
+      <div class="menu-inner-shadow"></div>
+
+      <ul class="menu-inner py-1">
+        <!-------------------------------------Menu----------------------------------------------- -->
+        <li class="menu-item active">
+          <a th:href="@{/agent}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+            <div data-i18n="Analytics">Dashboard</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons bx bx-dock-top"></i>
+            <div data-i18n="Account Settings">Tickets</div>
+          </a>
+          <ul class="menu-sub">
+            <li class="menu-item">
+              <a th:href="@{/consulterTicket}" class="menu-link">
+                <div data-i18n="Notifications">Consulter Tickets</div>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons bx bx-dock-top"></i>
+            <div data-i18n="Account Settings">Profil</div>
+          </a>
+          <ul class="menu-sub">
+            <li class="menu-item">
+              <a th:href="@{/profileagent}" class="menu-link">
+                <div data-i18n="Account"> Modifier Profile</div>
+              </a>
+            </li>
+
+          </ul>
+        </li>
+      </ul>
+    </aside>
+    <!-------------------------------------Menu----------------------------------------------- -->
+    <!-- Layout container -->
+    <div class="layout-page">
+      <!-------------------------------------header----------------------------------------------- -->
+      <!-- inclusion de l'en-tête --->
+      <header th:insert="header :: headerFragment"></header>
+      <!------------------------------------------------------------------------------------------- -->
+      <!-- Content dashboard -->
+      <div class="content-wrapper" style="margin-top:-2%;">
+        <!-- Content dashboard -->
+        <div class="content-wrapper" style="margin-top: 90px; /* Hauteur de l'en-tête */">
+
+          <!-------------------------------------Content------------------------------------------------------------------------->
+          <div class="container-xxl flex-grow-1 container-p-y" style="margin-top: -80px;">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card mb-4">
+                  <h5 class="card-header">Profile Details</h5>
+                  <!-- Account -->
+                  <div class="card-body">
+                    <div class="d-flex align-items-start align-items-sm-center gap-4">
+                      <div>
+                        <!-- chagement d'image -->
+                        <img id="profileImage" src="../assets/img/avatars/6.png" alt="Profile Image" width="150" height="150">
+                      </div>
+                      <div class="button-wrapper">
+                        <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                          <span class="d-none d-sm-block">Upload new photo</span>
+                          <i class="bx bx-upload d-block d-sm-none"></i>
+                          <input type="file" id="upload" class="account-file-input" hidden accept="image/png, image/jpeg" onchange="changeProfileImage(this)">
+                        </label>
+                      </div>
+                      <script>
+                        <!-- Script de chagement -->
+                        function changeProfileImage(input) {
+                          if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+
+                            reader.onload = function (e) {
+                              // Assurez-vous que l'ID correspond à l'ID de l'image dans le HTML
+                              document.getElementById('profileImage').src = e.target.result;
+                            };
+
+                            reader.readAsDataURL(input.files[0]);
+                          }
+                        }
+                      </script>
+                      <!-- fin de script  -->
+                    </div>
+                  </div>
+                  <hr class="my-0" />
+                  <div class="card-body">
+
+                    <div th:if="${success} == 'true'" class="alert alert-success" role="alert">
+                      Modification effectuée avec succès !
+                    </div>
+                    <form id="formAccountSettings" th:action="@{/profileagent/{idAgent}(idAgent=${agent.idAgent})}" method="POST" th:each="agent : ${agents}">
+                      <div class="row">
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-default-fullname">first Name</label>
+                          <input type="text" class="form-control" id="basic-default-fullname"  th:value="${agent.prenom}" name="prenom" placeholder="first Name" />
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-default-fullname">Last Name</label>
+                          <input type="text" class="form-control" id="basic-default-fullname" th:value="${agent.nom}" name="nom" placeholder="Last Name" />
+                        </div>
+
+
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-default-email">Email</label>
+                          <div class="input-group input-group-merge">
+                            <input
+                                    type="text"
+                                    id="basic-default-email"
+                                    class="form-control"
+                                    th:value="${agent.email}"
+                                    name="email"
+                                    placeholder="john.doe"
+                                    aria-label="john.doe"
+                                    aria-describedby="basic-default-email2"
+                            />
+                            <span class="input-group-text" id="basic-default-email2">@example.com</span>
+                          </div>
+                          <div class="form-text">You can use letters, numbers & periods</div>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-default-phone">Phone No</label>
+                          <input
+                                  type="text"
+                                  id="basic-default-phone"
+                                  name="tele"
+                                  th:value="${agent.tele}"
+                                  class="form-control phone-mask"
+                                  placeholder="658 799 8941"
+                          />
+                        </div>
+                        <div class="mb-3 col-md-6">
+                          <label for="address" class="form-label">Address</label>
+                          <input type="text" class="form-control" id="address" th:value="${agent.adresse}" name="adresse" placeholder="Address" />
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                          <label for="genre" class="form-label">Genre</label>
+                          <input type="text" class="form-control" id="genre" th:value="${agent.genre}" name="genre" placeholder="genre" />
+                        </div>
+                      </div>
+
+                      <div class = "box-footer">
+                        <button type="submit" class="btn btn-primary me-2">
+                          Update
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- /Account -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-------------------------------------------------------------------------------------------------------------->
+
+          <!-------------------------------------Footer------------------------------------------------------------------------->
+          <footer th:insert="footer :: footerFragment"></footer>
+          <!--------------------------------------------------------------------------------------------------------------->
+          <div class="content-backdrop fade"></div>
+        </div>
+        <!-- Content wrapper -->
+      </div>
+      <!-- / Layout page -->
+    </div>
+
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+  </div>
+
+
+
+  <!----------------------------------------Core JS-------------------------------------------------------------------->
+  <!-- build:js assets/vendor/js/core.js -->
+  <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+  <script src="../assets/vendor/libs/popper/popper.js"></script>
+  <script src="../assets/vendor/js/bootstrap.js"></script>
+  <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+  <script src="../assets/vendor/js/menu.js"></script>
+  <!-- endbuild -->
+
+  <!-- Vendors JS -->
+  <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+
+  <!-- Main JS -->
+  <script src="../assets/js/main.js"></script>
+
+  <!-- Page JS -->
+  <script src="../assets/js/dashboards-analytics.js"></script>
+
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</div>
+</body>
+</html>

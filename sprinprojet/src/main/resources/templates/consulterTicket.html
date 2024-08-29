@@ -111,7 +111,7 @@
           </a>
           <ul class="menu-sub">
             <li class="menu-item">
-              <a th:href="@{/modifierProfile}" class="menu-link">
+              <a th:href="@{/profileagent}" class="menu-link">
                 <div data-i18n="Notifications">modifier Profile</div>
               </a>
             </li>
@@ -155,12 +155,12 @@
                   </thead>
                   <tbody class="table-border-bottom-0">
                   <tr th:each="ticket : ${tickets}">
-                    <td >sara alaoui</td>
-                    <td>sara@gmail.com</td>
-                    <td>06000000</td>
-                    <td>Retard de livraison</td>
-                    <td><span class="badge bg-label-info me-1">j'ai pas recu ma commande</span></td>
-                    <td >31-05-2024</td>
+                    <td >??</td>
+                    <td>s??</td>
+                    <td>??</td>
+                    <td>??</td>
+                    <td><span class="badge bg-label-info me-1">??</span></td>
+                    <td >??</td>
                     <td th:text="${ticket.dateCloture}"></td>
                     <td>
                     <span th:text="${ticket.statut}" class="badge bg-label-info me-1"
@@ -179,8 +179,6 @@
                       </form>
                     </td>
                   </tr>
-
-                  <!-- Ajoutez plus de lignes au besoin -->
                   </tbody>
                 </table>
 

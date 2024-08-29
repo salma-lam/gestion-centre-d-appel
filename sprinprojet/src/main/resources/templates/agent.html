@@ -60,7 +60,7 @@
         <a th:href="@{/agent}" class="menu-link">
               <span class="app-brand-logo demo">
                 <div class="app-brand justify-content-center">
-                  <a th:href="@{/agent}" class="app-brand-link gap-2">
+                  <a href="../static/index.html" class="app-brand-link gap-2">
                     <span class="app-brand-logo demo">
                         <img src="../assets/img/logo1.png" alt="WeHelp" width="130px" height="50px">
                     </span>
@@ -106,7 +106,7 @@
           </a>
           <ul class="menu-sub">
             <li class="menu-item">
-              <a th:href="@{/modifierProfile}" class="menu-link">
+              <a th:href="@{/profileagent}" class="menu-link">
                 <div data-i18n="Notifications">modifier Profile</div>
               </a>
             </li>
@@ -117,11 +117,7 @@
     </aside>
 
     <!-------------------------------------------------------------------------------------------------------------------->
-
-
-
     <!-------------------------------------------------------------------------------------------------------------------->
-
 
 
     <!-- Layout container -->
@@ -144,11 +140,11 @@
           <div class="content-wrapper">
             <!-- Content -->
 
-            <div class="container-xxl flex-grow-1 container-p-y" style="margin-left: 160px">
+            <div class="container-xxl flex-grow-1 container-p-y" style="margin-left: 350px">
               <div class="row">
-                <div class="col-lg-8 mb-4 order-0">
+                <div class="col-lg-8 mb-4 order-0" style="margin-top: -80px">
                   <div class="card">
-                    <div class="d-flex align-items-end row">
+                    <div class="d-flex align-items-end row" >
                       <div class="col-sm-7">
                         <div class="card-body">
                           <h5 class="card-title text-primary">Dashboard Agent 🎉</h5>
@@ -178,12 +174,12 @@
 
 
           <!-- Statistics -->
-          <div class="container-xxl flex-grow-1 container-p-y" style="margin-left: 200px">
+          <div class="container-xxl flex-grow-1 container-p-y" style="margin-top: -390px">
             <div class="row">
               <div class="col-lg-4 col-md-4 order-1" >
                 <div class="row">
                   <!-- Statistique pour les clients -->
-                  <div class="col-lg-6 col-md-12 col-6 mb-4">
+                  <div class="col-lg-6 col-md-12 col-6 mb-4" >
                     <div class="card">
                       <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
@@ -244,7 +240,7 @@
                           </div>
                           <div class="dropdown">
                             <h5 class="fw-semibold d-block mb-1">Tickets</h5>
-                            <h3 class="card-title mb-2" id="ticketCount">0</h3>
+                            <h3 class="card-title mb-2" id="ticketCount">1</h3>
                           </div>
                         </div>
                       </div>
@@ -257,13 +253,8 @@
         </div>
 
 
-
         <!-------------------------------------------------------------------------------------------------------------->
-
-
-
-
-        <!------------------------------------------------------------------------------------------- -->
+      <!------------------------------------------------------------------------------------------- -->
       <!----------------------------------Inclusion du footer // syntaxe Thymeleaf pour inclure le footer----------------------------------------->
       <footer th:insert="footer :: footerFragment"></footer>
       <!--------------------------------------------------------------------------------------------------------------->

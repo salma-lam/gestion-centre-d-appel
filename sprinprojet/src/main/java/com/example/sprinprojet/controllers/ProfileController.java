@@ -16,20 +16,21 @@ public class ProfileController {
     public ProfileController(AgentService agentService) {
         this.agentService = agentService;
     }
-    @GetMapping("/modifierProfile")
+    @GetMapping("/profileagent")
     public String getlistAgents(Model model, @RequestParam(value = "success", required = false) String success) {
-        List<Agent> agentList = agentService.getAllAgents();
+        List<Agent> agentList = agentService.getAllAgents(); 
         model.addAttribute("agents", agentList);
         model.addAttribute("success", success);
-        System.out.println("Nombre d'agent est " +agentList.size());
-        return "modifierProfile";
+        System.out.println("Nombre d'agents est " + agentList.size());
+        return "profileagent";
     }
-    @GetMapping("/modifierProfile/{idAgent}")
+    
+    @GetMapping("/profileagent/{idAgent}")
     public String editAgenttForm(@PathVariable Long idAgent, Model model) {
         model.addAttribute("agent", agentService.getAgentById(idAgent));
-        return "modifierProfile";
+        return "profileagent";
     }
-    @PostMapping("/modifierProfile/{idAgent}")
+    @PostMapping("/profileagent/{idAgent}")
     public String updateClient(@PathVariable Long idAgent, @ModelAttribute("agent") Agent agent) {
         // get client from database by id
         Agent existingAgent = agentService.getAgentById(idAgent);
@@ -42,7 +43,7 @@ public class ProfileController {
 
         // save updated client object
         agentService.updateAgent(existingAgent);
-        return "redirect:/modifierProfile?success=true";
+        return "redirect:/profileagent?success=true";
     }
 
 
