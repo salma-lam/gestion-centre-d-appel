@@ -53,9 +53,15 @@ public class controller {
         return"consulterTicket";
         //
     }
-    @GetMapping("/modifierProfile")
-    public String modifierProfile(){
-        return"modifierProfile";
+    // @GetMapping("/modifierProfile")
+    // public String modifierProfile(){
+    //     return"modifierProfile";
+    //     //
+    // }   
+
+     @GetMapping("/profilagent")
+    public String profilagent(){
+        return"profilagent";
         //
     }
     @GetMapping("/client")
@@ -83,11 +89,11 @@ public class controller {
 //        return"admin";
 //        //
 //    }
-    @GetMapping("/listeClient")
-    public String listeClient(){
-        return"listeClient";
-        //
-    }
+    // @GetMapping("/listeClient")
+    // public String listeClient(){
+    //     return"listeClient";
+    //     //
+    // }
     @GetMapping("/listeTicket")
     public String listeTicket(){
         return"listeTicket";
@@ -103,11 +109,11 @@ public class controller {
         return"ajouteragent";
         //
     }
-    @GetMapping("/listeagent")
-    public String listeagent(){
-        return"listeagent";
-        //
-    }
+    // @GetMapping("/listeagent")
+    // public String listeagent(){
+    //     return"listeagent";
+    //     //
+    // }
     @GetMapping("/ajouterTechnicien")
     public String ajouterTechnicien(){
         return"ajouterTechnicien";

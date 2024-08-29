@@ -37,5 +37,8 @@ public class ClientService {
         return clientRepository.findById(idClient).orElse(null);
     }
 
+    public ClientService(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
+    }
 
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html
+        xmlns:th="http://www.thymeleaf.org"
         lang="en"
         class="light-style layout-menu-fixed"
         dir="ltr"
@@ -82,7 +83,7 @@
       <ul class="menu-inner py-1">
         <!-------------------------------------- Menu ------------------------------------------------------------------------------>
         <li class="menu-item active">
-          <a th:href="@{/listeagent}" class="menu-link">
+          <a th:href="@{/admin}" class="menu-link">
             <i class="menu-icon tf-icons bx bx-home-circle"></i>
             <div data-i18n="Analytics">Dashboard</div>
           </a>
@@ -118,21 +119,7 @@
 
           </ul>
         </li>
-        <!--  gere profile  -->
-        <li class="menu-item">
-          <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons bx bx-dock-top"></i>
-            <div data-i18n="Account Settings">Profil</div>
-          </a>
-          <ul class="menu-sub">
-            <li class="menu-item">
-              <a th:href="@{/profiladmin}" class="menu-link">
-                <div data-i18n="Account"> Modifier Profile</div>
-              </a>
-            </li>
 
-          </ul>
-        </li>
         <!-- Gérer l'agent -->
         <li class="menu-item">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -152,23 +139,20 @@
             </li>
           </ul>
         </li>
-        <!-- Gérer le technicien -->
+
+        <!--  gere profile  -->
         <li class="menu-item">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-dock-top"></i>
-            <div data-i18n="Account Settings">Technicien</div>
+            <div data-i18n="Account Settings">Profil</div>
           </a>
           <ul class="menu-sub">
             <li class="menu-item">
-              <a th:href="@{/ajouterTechnicien}" class="menu-link">
-                <div data-i18n="Account">Ajouter Techniciens </div>
+              <a th:href="@{/profiladmin}" class="menu-link">
+                <div data-i18n="Account"> Modifier Profile</div>
               </a>
             </li>
-            <li class="menu-item">
-              <a th:href="@{/listeTechnicien}" class="menu-link">
-                <div data-i18n="Account"> Liste Techniciens </div>
-              </a>
-            </li>
+
           </ul>
         </li>
       </ul>
@@ -194,6 +178,13 @@
         <div class="row">
           <div class="container-xxl flex-grow-1 container-p-y">
             <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light" style="margin-left: 12px"></span> Liste Agents</h4>
+           <div class="row">
+             <div class="col-lg-3">
+               <a th:href="@{ajouteragent}" class="btn btn-primary btn-sm mb-3">Add Agent</a>
+
+             </div>
+
+           </div>
             <!-- Striped Rows -->
             <div class="card">
               <h5 class="card-header" >Liste des agents</h5>
@@ -205,18 +196,32 @@
                     <th>Prenom</th>
                     <th>Email</th>
                     <th>Telephone</th>
-                    <th>Date d'ajout</th>
+                    <th>Adresse</th>
+                    <th>Genre</th>
+                    <th>Mot de passe</th>
+                    <th>Date de naissance</th>
+                    <th>Action</th>
                   </tr>
                   </thead>
                   <tbody class="table-border-bottom-0">
-                  <tr>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</td>
-                    <td>...</span></td>
-                    <td>...</td>
-                  </tr>
-                  </tbody>
+                    <tr th:each="agent : ${agents}">
+                        <td th:text="${agent.nom}">Nom</td>
+                        <td th:text="${agent.prenom}">Prénom</td>
+                        <td th:text="${agent.email}">Email</td>
+                        <td th:text="${agent.tele}">Téléphone</td>
+                        <td th:text="${agent.adresse}">Adresse</td>
+                        <td th:text="${agent.genre}">Genre</td>
+                        <td th:text="${agent.password}">Mot de passe</td>
+                        <td th:text="${agent.datenaissance}">Date de naissance</td>
+                        <td>
+                            <a th:href="@{/editagent/{idAgent}(idAgent=${agent.idAgent})}" class="btn btn-primary">Update</a>
+                            <form th:action="@{/listeagent/delete/{idAgent}(idAgent=${agent.idAgent})}" method="post" style="display:inline;">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+                
                 </table>
               </div>
             </div>

@@ -6,20 +6,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class AgentService {
-    // code de votre service
+
     @Autowired
     private AgentRepository agentRepository;
-    public List<Agent> getAllAgent() {
+
+    public Agent saveAgent(Agent agent){
+        return agentRepository.save(agent);
+    }
+
+    public List<Agent> getAllAgents() {
         return agentRepository.findAll();
     }
 
     public Agent updateAgent(Agent agent) {
         return agentRepository.save(agent);
     }
-
-    public Agent getAgentById(Long idAgent) {
+    public Agent getAgentById(long idAgent) {
         return agentRepository.findById(idAgent).orElse(null);
     }
+    
+    public void deleteAgentById(Long idAgent) {
+        agentRepository.deleteById(idAgent);
+    }
+    
+
 }

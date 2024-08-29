@@ -192,16 +192,17 @@
                                        </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                       <tr th:each="client : ${clients}">
-                                           <td th:text="${client.nom}">Nom</td>
-                                           <td th:text="${client.prenom}">Prénom</td>
-                                           <td th:text="${client.email}">Email</td>
-                                           <td th:text="${client.tele}">Téléphone</td>
-                                           <td th:text="${client.adresse}">Adresse</td>
-                                           <td th:text="${client.datenaissance}">Date de Naissance</td>
-                                           <td th:text="${client.genre}">Genre</td>
-                                      </tr>
+                                        <tr th:each="client : ${clients}">
+                                            <td th:text="${client.nom}">Nom</td>
+                                            <td th:text="${client.prenom}">Prénom</td>
+                                            <td th:text="${client.email}">Email</td>
+                                            <td th:text="${client.tele}">Téléphone</td>
+                                            <td th:text="${client.adresse}">Adresse</td>
+                                            <td th:text="${client.datenaissance}">Date de Naissance</td>
+                                            <td th:text="${client.genre}">Genre</td>
+                                        </tr>
                                     </tbody>
+                                    
                                 </table>
                             </div>
                         </div>

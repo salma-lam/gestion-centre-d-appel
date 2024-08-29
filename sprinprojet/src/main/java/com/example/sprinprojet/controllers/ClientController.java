@@ -2,6 +2,8 @@ package com.example.sprinprojet.controllers;
 
 import com.example.sprinprojet.model.Client;
 import com.example.sprinprojet.service.ClientService;
+
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,20 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
+    // private final ClientService clientService;
+
+    public ClientController(ClientService clientService) {
+        super();
+        this.clientService = clientService;
+    }
+
+    @GetMapping("/listeClient")
+    public String showClientList(Model model) {
+        List<Client> clients = clientService.getAllClients();
+        model.addAttribute("clients", clients);
+        return "listeClient"; // This should match the name of your Thymeleaf template without the .html extension
+    }
+    
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         Client client = new Client();
