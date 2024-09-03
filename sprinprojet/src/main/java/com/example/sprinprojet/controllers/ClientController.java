@@ -28,14 +28,14 @@ public class ClientController {
     public String showClientList(Model model) {
         List<Client> clients = clientService.getAllClients();
         model.addAttribute("clients", clients);
-        return "listeClient"; // This should match the name of your Thymeleaf template without the .html extension
+        return "listeClient"; 
     }
     
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         Client client = new Client();
         model.addAttribute("client", client);
-        return "register"; // Assurez-vous que le fichier s'appelle register.html
+        return "register"; 
     }
 
     @PostMapping("/register")
@@ -46,7 +46,7 @@ public class ClientController {
             return "register";
         }
         clientService.saveClient(client);
-        return "redirect:/login"; // Redirige vers la page de connexion après l'inscription
+        return "redirect:/login"; 
     }
 
 
