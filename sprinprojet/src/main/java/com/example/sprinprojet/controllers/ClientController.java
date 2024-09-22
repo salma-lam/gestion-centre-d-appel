@@ -1,98 +1,11 @@
-// package com.example.sprinprojet.controllers;
-
-// import com.example.sprinprojet.model.Client;
-// import com.example.sprinprojet.service.ClientService;
-
-// import java.util.List;
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Controller;
-// import org.springframework.ui.Model;
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.ModelAttribute;
-// import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.*;
-
-
-// @Controller
-// public class ClientController {
-
-//     @Autowired
-//     private ClientService clientService;
-
-//     // private final ClientService clientService;
-
-//     public ClientController(ClientService clientService) {
-//         super();
-//         this.clientService = clientService;
-//     }
-
-//     @GetMapping("/listeClient")
-//     public String showClientList(Model model) {
-//         List<Client> clients = clientService.getAllClients();
-//         model.addAttribute("clients", clients);
-//         return "listeClient"; 
-//     }
-    
-//     @GetMapping("/register")
-//     public String showRegistrationForm(Model model) {
-//         Client client = new Client();
-//         model.addAttribute("client", client);
-//         return "register"; 
-//     }
-
-//     @PostMapping("/register")
-//     public String registerClient(@ModelAttribute("client") Client client, Model model) {
-//         if (clientService.emailExists(client.getEmail())) {
-//             model.addAttribute("emailError", "Email déjà inscrit");
-//             model.addAttribute("client", client);
-//             return "register";
-//         }
-//         clientService.saveClient(client);
-//         return "redirect:/login";
-
-
-
-//         // Partie de l'agent
-
-//         @GetMapping("/profileclient")
-//         public String getlistClients(Model model, @RequestParam(value = "success", required = false) String success) {
-//             List<Client> clientsList = clientService.getAllClients();
-//             model.addAttribute("clients", clientsList);
-//             model.addAttribute("success", success);
-//             System.out.println("Nombre de clients est " + clientsList.size());
-//             return "profileclient";
-//         }
-    
-//         @GetMapping("/profileclient/{idClient}")
-//         public String editClientForm(@PathVariable Long idClient, Model model) {
-//             model.addAttribute("client", clientService.getClientById(idClient));
-//             return "profileclient";
-//         }
-    
-//         @PostMapping("/profileclient/{idClient}")
-//         public String updateClient(@PathVariable Long idClient, @ModelAttribute("client") Client client) {
-//             // get client from database by id
-//             Client existingClient = clientService.getClientById(idClient);
-//             existingClient.setNom(client.getNom());
-//             existingClient.setPrenom(client.getPrenom());
-//             existingClient.setEmail(client.getEmail());
-//             existingClient.setTele(client.getTele());
-//             existingClient.setAdresse(client.getAdresse());
-//             existingClient.setGenre(client.getGenre());
-    
-//             // save updated client object
-//             clientService.updateClient(existingClient);
-//             return "redirect:/profileclient?success=true";
-//         }
-    
-// }
-
-
-
 package com.example.sprinprojet.controllers;
 
 import com.example.sprinprojet.model.Client;
 import com.example.sprinprojet.service.ClientService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -125,41 +38,56 @@ public class ClientController {
         model.addAttribute("client", client);
         return "register"; 
     }
+// Enregistrer un client
+@PostMapping("/register")
+public String registerClient(@ModelAttribute("client") Client client, Model model) {
+    if (clientService.emailExists(client.getEmail())) {
+        model.addAttribute("emailError", "Email déjà inscrit");
+        model.addAttribute("client", client);
+        return "register";
+    }
+    clientService.saveClient(client);
+    return "redirect:/login";
+}
 
-    // Enregistrer un client
-    @PostMapping("/register")
-    public String registerClient(@ModelAttribute("client") Client client, Model model) {
-        if (clientService.emailExists(client.getEmail())) {
-            model.addAttribute("emailError", "Email déjà inscrit");
+// Afficher le profil du client connecté
+@GetMapping("/profileclient")
+public String getClientProfile(Model model, HttpServletRequest request, @RequestParam(value = "success", required = false) String success) {
+    HttpSession session = request.getSession(false);
+    if (session != null) {
+        Long clientId = (Long) session.getAttribute("clientId");
+        if (clientId != null) {
+            Client client = clientService.getClientById(clientId);
             model.addAttribute("client", client);
-            return "register";
+            model.addAttribute("success", success);
+            return "profileclient";
         }
-        clientService.saveClient(client);
-        return "redirect:/login";
     }
+    return "redirect:/login"; // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+}
 
-    // Partie de l'agent : Liste des clients
-    @GetMapping("/profileclient")
-    public String getlistClients(Model model, @RequestParam(value = "success", required = false) String success) {
-        List<Client> clientsList = clientService.getAllClients();
-        model.addAttribute("clients", clientsList);
-        model.addAttribute("success", success);
-        System.out.println("Nombre de clients est " + clientsList.size());
-        return "profileclient";
+// Modifier un client
+@GetMapping("/profileclient/edit")
+public String editClientForm(Model model, HttpServletRequest request) {
+    HttpSession session = request.getSession(false);
+    if (session != null) {
+        Long clientId = (Long) session.getAttribute("clientId");
+        if (clientId != null) {
+            Client client = clientService.getClientById(clientId);
+            model.addAttribute("client", client);
+            return "editClient"; // Afficher le formulaire d'édition
+        }
     }
+    return "redirect:/login"; // Rediriger vers la page de connexion
+}
 
-    // Modifier un client
-    @GetMapping("/profileclient/{idClient}")
-    public String editClientForm(@PathVariable Long idClient, Model model) {
-        model.addAttribute("client", clientService.getClientById(idClient));
-        return "profileclient";
-    }
-
-    // Mise à jour d'un client
-    @PostMapping("/profileclient/{idClient}")
-    public String updateClient(@PathVariable Long idClient, @ModelAttribute("client") Client client) {
-        // Récupérer le client depuis la base de données par son ID
-        Client existingClient = clientService.getClientById(idClient);
+// Mise à jour d'un client
+@PostMapping("/profileclient/{idClient}")
+public String updateClient(@PathVariable Long idClient, @ModelAttribute("client") Client client) {
+    // Récupérer le client existant depuis la base de données par son ID
+    Client existingClient = clientService.getClientById(idClient);
+    if (existingClient != null) {
+        // Mettre à jour les informations
         existingClient.setNom(client.getNom());
         existingClient.setPrenom(client.getPrenom());
         existingClient.setEmail(client.getEmail());
@@ -169,6 +97,18 @@ public class ClientController {
 
         // Sauvegarder l'objet client mis à jour
         clientService.updateClient(existingClient);
-        return "redirect:/profileclient?success=true";
     }
+    return "redirect:/profileclient?success=true"; // Rediriger après la mise à jour
+}
+
+@GetMapping("/client")
+public String dashboard(Model model, HttpServletRequest request) {
+    HttpSession session = request.getSession(false);
+    if (session == null || session.getAttribute("clientId") == null) {
+        return "redirect:/"; // Redirect to home page if not logged in
+    }
+    // Load your dashboard data and return the view
+    return "client"; // Replace with your actual dashboard view
+}
+
 }

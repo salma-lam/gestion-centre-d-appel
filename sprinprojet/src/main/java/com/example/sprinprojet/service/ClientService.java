@@ -29,9 +29,11 @@ public class ClientService {
 
     // Modifier profil
 
-    public Client updateClient(Client client) {
-        return clientRepository.save(client);
+ 
+    public void updateClient(Client client) {
+        clientRepository.save(client); // Assurez-vous que cette méthode gère correctement l'update
     }
+    
 
     public Client getClientById(Long idClient) {
         return clientRepository.findById(idClient).orElse(null);
@@ -41,4 +43,8 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
+    public Client findByEmail(String email) {
+        return clientRepository.findByEmail(email);  // Retourne un Client
+    }
+    
 }

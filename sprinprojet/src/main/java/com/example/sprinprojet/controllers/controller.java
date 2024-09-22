@@ -64,11 +64,11 @@ public class controller {
         return"profilagent";
         //
     }
-    @GetMapping("/client")
-    public String client(){
-        return"client";
-        //
-    }
+    // @GetMapping("/client")
+    // public String client(){
+    //     return"client";
+    //     //
+    // }
 //    @GetMapping("/consulterReclamation")
 //    public String consulterReclamationt(){
 //        return"consulterReclamation";

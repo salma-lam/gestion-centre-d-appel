@@ -195,11 +195,11 @@
                     <td th:text="${reclamation.typeReclamation}">Type Reclamation</td>
                     <td th:text="${reclamation.dateReclamation}">Date Reclamation</td>
                     <td>
-                      <form th:action="@{/consulterReclamation/deleteReclamation/{idReclamation} (idReclamation=${reclamation.idReclamation})}" method="post">
-                        <input type="hidden" name="_method" value="DELETE" />
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                      <form th:action="@{/consulterReclamation/deleteReclamation/{idReclamation}(idReclamation=${reclamation.idReclamation})}" method="post">
+                          <input type="hidden" name="_method" value="DELETE" />
+                          <button type="submit" class="btn btn-danger">Delete</button>
                       </form>
-                    </td>
+                    </td>                  
 <!--                    <td>-&#45;&#45;</td>-->
 <!--                    <td>-&#45;&#45;</td>-->
                   </tr>

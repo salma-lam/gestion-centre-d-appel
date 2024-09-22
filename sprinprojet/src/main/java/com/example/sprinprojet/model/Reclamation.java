@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+// import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -21,24 +21,13 @@ public class Reclamation {
     private String typeReclamation;
 
 
-    @OneToMany
-    private List< Agent> agent;
-
-    @OneToMany
-    private List<Client> client;
-
-
-    @OneToMany
-    private List<Admin> admin;
-
-
-    @OneToMany
-    private List<Produit> produit;
-
-
-    @OneToOne
-    private Ticket ticket;
-
+ 
+ 
+  // Ajoutez la relation avec le client
+  @ManyToOne
+  @JoinColumn(name = "client_id")
+  private Client client;
+ 
 
 /// Getters et setters
     public Long getIdReclamation() {

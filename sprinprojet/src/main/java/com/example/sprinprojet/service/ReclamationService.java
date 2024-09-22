@@ -23,10 +23,14 @@ public class ReclamationService {
         return reclamationRepository.findAll();
     }
 
-//    // Delete Reclamation
-//    public void deleteReclamationById(long idReclamation) {
-//        reclamationRepository.deleteById(idReclamation);
-//    }
+    // Consulter Reclamtion
+    public List<Reclamation> getReclamationsByClientId(Long clientId) {
+        return reclamationRepository.findByClientId(clientId);
+    }
+    
+    public void deleteReclamationById(Long idReclamation) {
+        reclamationRepository.deleteById(idReclamation);
+    }
 
     // Ajouter Reclamation
     public Reclamation saveReclamation(Reclamation reclamation) {
