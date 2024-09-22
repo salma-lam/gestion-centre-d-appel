@@ -189,6 +189,7 @@
                                            <th>Adresse</th>
                                            <th>Date de Naissance</th>
                                            <th>Genre</th>
+                                           <th>Action</th>
                                        </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
@@ -200,6 +201,12 @@
                                             <td th:text="${client.adresse}">Adresse</td>
                                             <td th:text="${client.datenaissance}">Date de Naissance</td>
                                             <td th:text="${client.genre}">Genre</td>
+                                            <!-- <td>
+                                                <form th:action="@{|/listeClient/delete/${client.idClient}|}" method="post" style="display:inline;">
+                                                    <input type="hidden" name="_method" value="DELETE" />
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
+                                            </td>                                                                           -->
                                         </tr>
                                     </tbody>
                                     

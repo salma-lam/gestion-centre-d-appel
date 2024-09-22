@@ -198,7 +198,6 @@
                     <th>Telephone</th>
                     <th>Adresse</th>
                     <th>Genre</th>
-                    <th>Mot de passe</th>
                     <th>Date de naissance</th>
                     <th>Action</th>
                   </tr>
@@ -211,7 +210,6 @@
                         <td th:text="${agent.tele}">Téléphone</td>
                         <td th:text="${agent.adresse}">Adresse</td>
                         <td th:text="${agent.genre}">Genre</td>
-                        <td th:text="${agent.password}">Mot de passe</td>
                         <td th:text="${agent.datenaissance}">Date de naissance</td>
                         <td>
                             <a th:href="@{/editagent/{idAgent}(idAgent=${agent.idAgent})}" class="btn btn-primary">Update</a>

@@ -46,5 +46,9 @@ public class ClientService {
     public Client findByEmail(String email) {
         return clientRepository.findByEmail(email);  // Retourne un Client
     }
+
+    public void deleteClientById(Long idClient) {
+        clientRepository.deleteById(idClient);
+    }
     
 }

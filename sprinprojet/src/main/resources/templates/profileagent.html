@@ -173,7 +173,7 @@
                     <div th:if="${success} == 'true'" class="alert alert-success" role="alert">
                       Modification effectuée avec succès !
                     </div>
-                    <form id="formAccountSettings" th:action="@{/profileagent/{idAgent}(idAgent=${agent.idAgent})}" method="POST" th:each="agent : ${agents}">
+                    <form id="formAccountSettings" th:action="@{/profileagent/{idAgent}(idAgent=${agent.idAgent})}" method="POST">
                       <div class="row">
                         <div class="mb-3">
                           <label class="form-label" for="basic-default-fullname">first Name</label>
@@ -226,9 +226,7 @@
                       </div>
 
                       <div class = "box-footer">
-                        <button type="submit" class="btn btn-primary me-2">
-                          Update
-                        </button>
+                        <button type="submit" class="btn btn-primary me-2"> Update </button>
                       </div>
                     </form>
                   </div>

@@ -214,47 +214,47 @@
                     <div th:if="${success} == 'true'" class="alert alert-success" role="alert">
                       Modification effectuée avec succès !
                     </div>
-                    <form id="formAccountSettings" th:action="@{/profiladmin/{idAdmin}(idAdmin=${admin.idAdmin})}" method="POST" th:each="admin  :${admins}">
+                    <form id="formAccountSettings" th:action="@{/profiladmin/{idAdmin}(idAdmin=${admin.idAdmin})}" method="POST">
                       <div class="row">
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-default-fullname">First Name</label>
-                          <input type="text" class="form-control" id="basic-default-fullname" th:value="${admin.prenom}" name="prenom"  />
-                        </div>
-
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-default-lastname">Last Name</label>
-                          <input type="text" class="form-control" id="basic-default-lastname" th:value="${admin.nom}" name="nom"/>
-                        </div>
-
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-default-email">Email</label>
-                          <div class="input-group input-group-merge">
-                            <input type="text" id="basic-default-email" class="form-control" th:value="${admin.email}" name="email" aria-describedby="basic-default-email2" />
-                            <span class="input-group-text" id="basic-default-email2">@gmail.com</span>
+                          <div class="mb-3">
+                              <label class="form-label" for="basic-default-fullname">First Name</label>
+                              <input type="text" class="form-control" id="basic-default-fullname" th:value="${admin.prenom}" name="prenom" />
                           </div>
-                          <div class="form-text">You can use letters, numbers & periods</div>
-                        </div>
-
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-default-phone">Phone No</label>
-                          <input type="text" id="basic-default-phone" name="tele" th:value="${admin.tele}" class="form-control phone-mask"/>
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-                          <label for="address" class="form-label">Address</label>
-                          <input type="text" class="form-control" id="address" th:value="${admin.adresse}" name="adresse" />
-                        </div>
-
-                        <div class="mb-3 col-md-6">
-                          <label for="genre" class="form-label">Genre</label>
-                          <input type="text" class="form-control" id="genre" th:value="${admin.genre}" name="genre" />
-                        </div>
+                  
+                          <div class="mb-3">
+                              <label class="form-label" for="basic-default-lastname">Last Name</label>
+                              <input type="text" class="form-control" id="basic-default-lastname" th:value="${admin.nom}" name="nom" />
+                          </div>
+                  
+                          <div class="mb-3">
+                              <label class="form-label" for="basic-default-email">Email</label>
+                              <div class="input-group input-group-merge">
+                                  <input type="text" id="basic-default-email" class="form-control" th:value="${admin.email}" name="email" aria-describedby="basic-default-email2" />
+                                  <span class="input-group-text" id="basic-default-email2">@gmail.com</span>
+                              </div>
+                              <div class="form-text">You can use letters, numbers & periods</div>
+                          </div>
+                  
+                          <div class="mb-3">
+                              <label class="form-label" for="basic-default-phone">Phone No</label>
+                              <input type="text" id="basic-default-phone" name="tele" th:value="${admin.tele}" class="form-control phone-mask" />
+                          </div>
+                  
+                          <div class="mb-3 col-md-6">
+                              <label for="address" class="form-label">Address</label>
+                              <input type="text" class="form-control" id="address" th:value="${admin.adresse}" name="adresse" />
+                          </div>
+                  
+                          <div class="mb-3 col-md-6">
+                              <label for="genre" class="form-label">Genre</label>
+                              <input type="text" class="form-control" id="genre" th:value="${admin.genre}" name="genre" />
+                          </div>
                       </div>
-
+                  
                       <div class="box-footer">
-                        <button type="submit" class="btn btn-primary me-2">Update</button>
+                          <button type="submit" class="btn btn-primary me-2">Update</button>
                       </div>
-                    </form>
+                  </form>                  
 
                   </div>
                   <!-- /Account -->

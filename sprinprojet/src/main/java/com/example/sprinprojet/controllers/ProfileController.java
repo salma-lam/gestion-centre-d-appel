@@ -11,40 +11,40 @@ import java.util.List;
 
 @Controller
 public class ProfileController {
-    @Autowired
-    private AgentService agentService;
-    public ProfileController(AgentService agentService) {
-        this.agentService = agentService;
-    }
-    @GetMapping("/profileagent")
-    public String getlistAgents(Model model, @RequestParam(value = "success", required = false) String success) {
-        List<Agent> agentList = agentService.getAllAgents(); 
-        model.addAttribute("agents", agentList);
-        model.addAttribute("success", success);
-        System.out.println("Nombre d'agents est " + agentList.size());
-        return "profileagent";
-    }
+    // @Autowired
+    // private AgentService agentService;
+    // public ProfileController(AgentService agentService) {
+    //     this.agentService = agentService;
+    // }
+    // @GetMapping("/profileagent")
+    // public String getlistAgents(Model model, @RequestParam(value = "success", required = false) String success) {
+    //     List<Agent> agentList = agentService.getAllAgents(); 
+    //     model.addAttribute("agents", agentList);
+    //     model.addAttribute("success", success);
+    //     System.out.println("Nombre d'agents est " + agentList.size());
+    //     return "profileagent";
+    // }
     
-    @GetMapping("/profileagent/{idAgent}")
-    public String editAgenttForm(@PathVariable Long idAgent, Model model) {
-        model.addAttribute("agent", agentService.getAgentById(idAgent));
-        return "profileagent";
-    }
-    @PostMapping("/profileagent/{idAgent}")
-    public String updateClient(@PathVariable Long idAgent, @ModelAttribute("agent") Agent agent) {
-        // get client from database by id
-        Agent existingAgent = agentService.getAgentById(idAgent);
-        existingAgent.setNom(agent.getNom());
-        existingAgent.setPrenom(agent.getPrenom());
-        existingAgent.setEmail(agent.getEmail());
-        existingAgent.setTele(agent.getTele());
-        existingAgent.setAdresse(agent.getAdresse());
-        existingAgent.setGenre(agent.getGenre());
+    // @GetMapping("/profileagent/{idAgent}")
+    // public String editAgenttForm(@PathVariable Long idAgent, Model model) {
+    //     model.addAttribute("agent", agentService.getAgentById(idAgent));
+    //     return "profileagent";
+    // }
+    // @PostMapping("/profileagent/{idAgent}")
+    // public String updateClient(@PathVariable Long idAgent, @ModelAttribute("agent") Agent agent) {
+    //     // get client from database by id
+    //     Agent existingAgent = agentService.getAgentById(idAgent);
+    //     existingAgent.setNom(agent.getNom());
+    //     existingAgent.setPrenom(agent.getPrenom());
+    //     existingAgent.setEmail(agent.getEmail());
+    //     existingAgent.setTele(agent.getTele());
+    //     existingAgent.setAdresse(agent.getAdresse());
+    //     existingAgent.setGenre(agent.getGenre());
 
-        // save updated client object
-        agentService.updateAgent(existingAgent);
-        return "redirect:/profileagent?success=true";
-    }
+    //     // save updated client object
+    //     agentService.updateAgent(existingAgent);
+    //     return "redirect:/profileagent?success=true";
+    // }
 
 
 }

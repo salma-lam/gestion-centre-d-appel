@@ -64,7 +64,7 @@
                 <a th:href="@{/ajouteragent}" class="menu-link">
               <span class="app-brand-logo demo">
                 <div class="app-brand justify-content-center">
-                  <a th:href="@{/admin}" class="app-brand-link gap-2">
+                  <a th:href="@{./admin}" class="app-brand-link gap-2">
                     <span class="app-brand-logo demo">
                         <img src="../assets/img/logo1.png" alt="WeHelp" width="130px" height="50px">
                     </span>
@@ -184,11 +184,11 @@
                                 <form th:action="@{/listeagent}" th:object="${agent}" method="POST">
                                     <div class="mb-3">
                                         <label class="form-label" for="basic-default-fullname">Nom</label>
-                                        <input name="nom" type="text" class="form-control" id="basic-default-fullname" placeholder="Nom"  />
+                                        <input name="nom" type="text" class="form-control" id="basic-default-fullname" placeholder="Nom" required />
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="basic-default-fullname">Prenom</label>
-                                        <input name="prenom" type="text" class="form-control" id="basic-default-fullname" placeholder="Prenom"  />
+                                        <input name="prenom" type="text" class="form-control" id="basic-default-fullname" placeholder="Prenom" required />
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="basic-default-email">Email</label>
@@ -202,17 +202,18 @@
 
                                                     aria-label="email"
                                                     aria-describedby="basic-default-email2"
+                                                    required
                                             />
                                             <span class="input-group-text" id="basic-default-email2">@gmail.com</span>
                                         </div>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="basic-default-company">Mot de passe</label>
-                                        <input name="password" type="password" class="form-control" id="basic-default-company" placeholder="Mot de passe" />
+                                        <input name="password" type="password" class="form-control" id="basic-default-company" placeholder="Mot de passe" required/>
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label" for="genre">Genre</label>
-                                        <select name="genre" id="genre" class="select2 form-select" >
+                                        <select name="genre" id="genre" class="select2 form-select" required>
                                             <option value="" name="genre">Select</option>
                                             <option value="femme">Femme</option>
                                             <option value="homme">Homme</option>
@@ -227,16 +228,16 @@
                                                 id="basic-default-phone"
                                                 class="form-control phone-mask"
                                                 placeholder="Telephone"
-
+                                                required
                                         />
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="basic-default-fullname">Adresse</label>
-                                        <input name="adresse" type="text" class="form-control" id="basic-default-fullname" placeholder="Adresse" />
+                                        <input name="adresse" type="text" class="form-control" id="basic-default-fullname" placeholder="Adresse" required />
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="basic-default-fullname">Date de naissance</label>
-                                        <input name="datenaissance" type="date" class="form-control" id="basic-default-fullname" />
+                                        <input name="datenaissance" type="date" class="form-control" id="basic-default-fullname" required />
                                     </div>
                                     <button type="submit" class="btn btn-primary">Envoyer</button>
                                 </form>

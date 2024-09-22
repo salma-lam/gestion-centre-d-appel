@@ -63,7 +63,7 @@
         <a th:href="@{/ajouterTechnicien}" class="menu-link">
               <span class="app-brand-logo demo">
                 <div class="app-brand justify-content-center">
-                  <a href="../WeHelp/wehelp.html" class="app-brand-link gap-2">
+                  <a href="@{../admin}" class="app-brand-link gap-2">
                     <span class="app-brand-logo demo">
                         <img src="../assets/img/logo1.png" alt="WeHelp" width="130px" height="50px">
                     </span>
@@ -197,11 +197,11 @@
                 <form>
                   <div class="mb-3">
                     <label class="form-label" for="basic-default-fullname">Nom</label>
-                    <input type="text" class="form-control" id="basic-default-fullname" placeholder="Nom" />
+                    <input type="text" class="form-control" id="basic-default-fullname" placeholder="Nom" required />
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="basic-default-company">Prenom</label>
-                    <input type="text" class="form-control" id="basic-default-company" placeholder="Prenom" />
+                    <input type="text" class="form-control" id="basic-default-company" placeholder="Prenom" required />
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="basic-default-email">Email</label>
@@ -213,6 +213,7 @@
                               placeholder="email"
                               aria-label="email"
                               aria-describedby="basic-default-email2"
+                              required
                       />
                       <span class="input-group-text" id="basic-default-email2">@gmail.com</span>
                     </div>
@@ -224,15 +225,16 @@
                             id="basic-default-phone"
                             class="form-control phone-mask"
                             placeholder="Telephone"
+                            required
                     />
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="basic-default-fullname">Adresse</label>
-                    <input type="text" class="form-control" id="basic-default-fullname" placeholder="Adresse" />
+                    <input type="text" class="form-control" id="basic-default-fullname" placeholder="Adresse" required />
                   </div>
                   <div class="mb-3">
                     <label class="form-label" for="basic-default-fullname">Date d'ajout</label>
-                    <input type="date" class="form-control" id="basic-default-fullname" />
+                    <input type="date" class="form-control" id="basic-default-fullname" required />
                   </div>
                   <button type="submit" class="btn btn-primary">Envoyer</button>
                 </form>
