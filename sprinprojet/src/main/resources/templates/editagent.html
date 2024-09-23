@@ -232,7 +232,7 @@
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label" for="genre">Genre</label>
                                         <select name="genre" id="genre" class="select2 form-select" th:value="${agent.genre}" >
-                                            <option value="" name="genre">Select</option>
+                                            <option name="genre" th:value="${agent.genre}">Select</option>
                                             <option value="femme">Femme</option>
                                             <option value="homme">Homme</option>
                                         </select>

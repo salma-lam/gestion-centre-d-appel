@@ -88,7 +88,7 @@
                     </a>
                 </li>
 
-                <!--  gerer client  -->
+                <!--  Gérer client  -->
                 <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -98,36 +98,6 @@
                         <li class="menu-item">
                             <a th:href="@{/listeClient}" class="menu-link">
                                 <div data-i18n="Account">Liste Clients</div>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-                <!--  suivre ticket  -->
-                <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                        <div data-i18n="Account Settings">Ticket</div>
-                    </a>
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a th:href="@{/listeTicket}" class="menu-link">
-                                <div data-i18n="Account">Suivre Ticket</div>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-                <!--  gere profile  -->
-                <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                        <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                        <div data-i18n="Account Settings">Profil</div>
-                    </a>
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a th:href="@{/profiladmin}" class="menu-link">
-                                <div data-i18n="Account"> Modifier Profile</div>
                             </a>
                         </li>
 
@@ -152,6 +122,36 @@
                         </li>
                     </ul>
                 </li>
+                <!--  suivre ticket  -->
+                <li class="menu-item">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                        <div data-i18n="Account Settings">Ticket</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a th:href="@{/listeTicket}" class="menu-link">
+                                <div data-i18n="Account">Suivre Ticket</div>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- Gérer profile  -->
+                <li class="menu-item">
+                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                        <div data-i18n="Account Settings">Profil</div>
+                    </a>
+                    <ul class="menu-sub">
+                        <li class="menu-item">
+                            <a th:href="@{/profiladmin}" class="menu-link">
+                                <div data-i18n="Account"> Modifier Profile</div>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>   
             </ul>
         </aside>
         <!-------------------------------------------------------------------------------------------------------------------->

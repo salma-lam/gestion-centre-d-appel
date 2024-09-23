@@ -1,52 +1,11 @@
-//package com.example.sprinprojet.controllers;
-//
-//import com.example.sprinprojet.Repository.AgentRepository;
-//import com.example.sprinprojet.model.Agent;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
-//
-//
-//@Controller
-//public class AgentController {
-//
-//    private AgentRepository agentRepository;
-//
-//    public AgentController(AgentRepository agentRepository) {
-//        this.agentRepository = agentRepository;
-//    }
-//
-//    @GetMapping("/loginAgent")
-//    public String showAgentLoginForm() {
-//        return "loginAgent";
-//    }
-//
-//    @PostMapping("/loginAgent")
-//    public String loginAgent(@RequestParam String email, @RequestParam String password, Model model) {
-//        Agent agent = agentRepository.findByEmail(email);
-//        if (agent != null && agent.getPassword().equals(password)) {
-//            // Login successful
-//            model.addAttribute("agent", agent);
-//            return "agent" + agent.getId();  //Redirige vers une URL avec l'idAgent
-//        } else {
-//            // Login failed
-//            model.addAttribute("error", "Email ou mot de passe incorrect");
-//            return "loginAgent";
-//        }
-//    }
-//}
-
-
 package com.example.sprinprojet.controllers;
 
 import com.example.sprinprojet.Repository.AgentRepository;
 import com.example.sprinprojet.model.Agent;
 import com.example.sprinprojet.service.AgentService;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import java.util.List; 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -88,7 +47,6 @@ public class AgentController {
     }
     
 
-    // handler method to handle list agents and return mode and view
     @GetMapping("/listeagent")
     public String getAllAgents(Model model) {
         model.addAttribute("agents", agentService.getAllAgents());
@@ -138,13 +96,12 @@ public class AgentController {
         return "redirect:/listeagent";
 
     }
-
     @PostMapping("/listeagent/delete/{idAgent}")
     public String deleteAgent(@PathVariable Long idAgent) {
-        agentService.deleteAgentById(idAgent);
-        return "redirect:/listegent";
+        agentService.deleteAgentById(idAgent); // Suppression de l'agent
+        return "redirect:/listeagent"; // Rediriger vers la page correcte après suppression
     }
-
+    
     // Partie profile agent
     @GetMapping("/profileagent")
     public String getAgentProfile(Model model, HttpServletRequest request, @RequestParam(value = "success", required = false) String success) {

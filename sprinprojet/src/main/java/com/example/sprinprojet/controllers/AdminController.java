@@ -62,7 +62,7 @@ public class AdminController {
                 return "profiladmin"; // Afficher la page de profil de l'admin
             }
         }
-        return "redirect:/login"; // Rediriger vers la page de connexion si non connecté
+        return "redirect:/loginAdmin"; // Rediriger vers la page de connexion si non connecté
     }
 
     @GetMapping("/profiladmin/edit")
