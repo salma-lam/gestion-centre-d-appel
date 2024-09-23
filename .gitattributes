@@ -1,7 +1,7 @@
 # Forcer la détection de Java comme langage principal
 *.java linguist-language=Java
 
-# Ignorer les fichiers HTML, CSS, JavaScript, JSON, Vue.js, et SCSS
+# Ignorer les fichiers HTML, CSS, JavaScript
 *.html linguist-detectable=false
 *.css linguist-detectable=true
 *.js linguist-detectable=false
