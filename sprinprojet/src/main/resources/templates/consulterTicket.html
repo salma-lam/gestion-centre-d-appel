@@ -141,47 +141,36 @@
               <div class="table-responsive text-nowrap">
                 <table class="table table-striped">
                   <thead>
-                  <tr>
-                    <th>Nom et Prénom</th>
-                    <th>Email</th>
-                    <th>Téléphone</th>
-                    <th>Type de Réclamation</th>
-                    <th>Réclamation</th>
-                    <th>Date de Réclamation</th>
-                    <th>Date de Clôture</th>
-                    <th>Statut</th>
-                    <th>Actions</th>
-                  </tr>
+                    <tr>
+                      <th>Nom et Prénom</th>
+                      <th>Email</th>
+                      <th>Téléphone</th>
+                      <th>Type de Réclamation</th>
+                      <th>Réclamation</th>
+                      <th>Date de Réclamation</th>
+                      <th>Actions</th>
+                    </tr>
                   </thead>
                   <tbody class="table-border-bottom-0">
-                  <tr th:each="ticket : ${tickets}">
-                    <td >??</td>
-                    <td>??</td>
-                    <td>??</td>
-                    <td>??</td>
-                    <td><span class="badge bg-label-info me-1">??</span></td>
-                    <td >??</td>
-                    <td th:text="${ticket.dateCloture}"></td>
-                    <td>
-                    <span th:text="${ticket.statut}" class="badge bg-label-info me-1"
-                          th:classappend="${ticket.statut == 'Terminé' ? 'bg-green' :
-                                         ticket.statut == 'En cours' ? 'bg-warning' :
-                                         ticket.statut == 'En attente' ? 'bg-info' :
-                                         ticket.statut == 'Annulé' ? 'bg-danger' : ''}">
-                    </span>
-                    </td>
-                    <td>
-
-                      <form th:action="@{/deleteTicket/{idTicket} (idTicket=${ticket.idTicket})}" method="post">
-                        <input type="hidden" name="_method" value="DELETE" />
-                        <a th:href="@{/AddInfo/{idTicket}(idTicket=${ticket.idTicket})}" class="btn btn-primary me-2">Update</a>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                      </form>
-                    </td>
-                  </tr>
+                    <!-- Loop through the list of tickets -->
+                    <tr th:each="ticket : ${tickets}">
+                      <!-- Access Client and Reclamation data via the ticket -->
+                      <td th:text="${ticket.reclamation.client.nom} + ' ' + ${ticket.reclamation.client.prenom}"></td>
+                      <td th:text="${ticket.reclamation.client.email}"></td>
+                      <td th:text="${ticket.reclamation.client.tele}"></td>
+                      <td th:text="${ticket.reclamation.typeReclamation}"></td>
+                      <td th:text="${ticket.reclamation.message}"></td>
+                      <td th:text="${ticket.reclamation.dateReclamation}"></td>
+                      <td>
+                        <form th:action="@{/deleteTicket/{idTicket}(idTicket=${ticket.idTicket})}" method="post">
+                          <input type="hidden" name="_method" value="DELETE" />
+                          <a th:href="@{/AddInfo/{idTicket}(idTicket=${ticket.idTicket})}" class="btn btn-primary me-2">Update</a>
+                          <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                      </td>
+                    </tr>
                   </tbody>
-                </table>
-
+                </table>                               
               </div>
             </div>
             <!--/ Striped Rows -->
