@@ -20,6 +20,9 @@ public class TicketService {
     public Ticket updateTicket(Ticket ticket) {
         return  ticketRepository.save(ticket);
     }
+    public List<Ticket> getAllTickets() {
+        return ticketRepository.findAll();
+    }
 
 
 
