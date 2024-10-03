@@ -26,15 +26,4 @@ public class Admin {
     public Long getId() {
         return idAdmin;
     }
-
-    // @ManyToOne
-   // private Agent agent;
-
-
-   // @ManyToOne
-  //  private Message messages;
-
-
-   // @ManyToOne
-   // private Technicien techniciens;
 }
