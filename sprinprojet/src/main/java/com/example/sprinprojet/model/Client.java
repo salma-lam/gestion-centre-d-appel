@@ -29,9 +29,6 @@ public class Client {
     private List<Agent> agent;
 
 
-    //@ManyToOne
-    //private Reclamation reclamations;
-
     // Getters et setters
     public Long getIdClient() {
         return idClient;
