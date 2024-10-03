@@ -25,12 +25,6 @@ public class Agent {
     private String genre;
 
 
-    //@ManyToOne
-    //private Client clients;
-
-
-   // @ManyToOne
-    //private Technicien techniciens;
 
     @OneToMany
     private List<Admin> admin;
@@ -39,13 +33,6 @@ public class Agent {
         return idAgent;
     }
 
-
-    //@ManyToOne
-   // private Ticket tickets;
-
-
-   // @ManyToOne
-   // private Reclamation reclamations;
 
 
 }
