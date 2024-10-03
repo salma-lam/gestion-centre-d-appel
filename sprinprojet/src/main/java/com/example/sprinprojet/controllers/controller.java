@@ -8,11 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class controller {
-//    @GetMapping("/index")
-//    public String index(){
-//        return"index";
-//        //
-//    }
 
     @GetMapping("/index")
     public String home(HttpSession session, Model model) {
